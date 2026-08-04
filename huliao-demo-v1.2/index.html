@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>胡了吗 Demo v1.2.0</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Hackathon MVP · v1.2.0</p>
+          <h1>胡了吗</h1>
+        </div>
+        <span class="status-pill">Demo Ready</span>
+      </header>
+
+      <section class="hero-panel" aria-labelledby="demo-title">
+        <div>
+          <p class="eyebrow">麻将智能算分助手</p>
+          <h2 id="demo-title">拍一下牌面，自动算清麻将分</h2>
+          <p class="hero-copy">
+            胡牌后上传一张牌面，YOLO 模型识别麻将牌，系统输出牌面结果，并继续进入规则算分与账单记录流程。
+          </p>
+        </div>
+        <div class="hero-tiles" aria-label="麻将牌示意图">
+          <span>一萬</span>
+          <span>二萬</span>
+          <span>三萬</span>
+          <span class="red">中</span>
+          <span class="green">發</span>
+        </div>
+      </section>
+
+      <nav class="step-tabs" aria-label="Demo步骤">
+        <button class="step-tab active" data-step-target="setup">1 设置</button>
+        <button class="step-tab" data-step-target="recognize">2 识别</button>
+        <button class="step-tab" data-step-target="result">3 算分</button>
+        <button class="step-tab" data-step-target="history">4 复盘</button>
+      </nav>
+
+      <section class="workspace">
+        <article class="panel" id="setup">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Step 1</p>
+              <h3>统一结算口径</h3>
+            </div>
+            <span class="mini-badge">P0</span>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              地区规则
+              <select id="ruleSelect">
+                <option value="guangdong">广东推倒胡</option>
+                <option value="sichuan">四川血战到底</option>
+                <option value="hangzhou">杭州麻将</option>
+              </select>
+            </label>
+            <label>
+              基础点
+              <input id="basePoint" type="number" min="1" max="20" value="2" />
+            </label>
+            <label>
+              本局玩家
+              <input id="playerName" type="text" value="阿妞" />
+            </label>
+            <label>
+              结算人数
+              <select id="opponentCount">
+                <option value="3">三家结算</option>
+                <option value="1">一家结算</option>
+              </select>
+            </label>
+          </div>
+
+          <button class="primary-action" id="startDemo">开始识别</button>
+        </article>
+
+        <article class="panel" id="recognize">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Step 2</p>
+              <h3>上传图片并识别牌面</h3>
+            </div>
+            <span class="mini-badge">YOLO</span>
+          </div>
+
+          <div class="upload-box">
+            <input id="imageInput" type="file" accept="image/*" />
+            <div class="mock-photo" id="photoPreview">
+              <div class="photo-table">
+                <span>一萬</span>
+                <span>二萬</span>
+                <span>三萬</span>
+                <span>四筒</span>
+                <span>五筒</span>
+                <span>六筒</span>
+                <span>七条</span>
+                <span>八条</span>
+                <span>九条</span>
+                <span class="red">中</span>
+                <span class="red">中</span>
+                <span class="red">中</span>
+                <span>白</span>
+                <span>白</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="manual-correction">
+            <p class="eyebrow">识别结果兜底</p>
+            <p class="muted">
+              v1.2 会优先调用本地 YOLO 服务识别图片。如果服务未启动或识别结果不足，可临时选择样例牌型继续演示算分闭环。
+            </p>
+            <label>
+              识别结果
+              <select id="handScenario">
+                <option value="arrowPinghu">平胡 + 红中刻 + 自摸</option>
+                <option value="sevenPairs">七小对 + 自摸</option>
+                <option value="pureSuit">清一色 + 平胡 + 自摸</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="action-row">
+            <button class="secondary-action" id="useSample">使用稳定样例</button>
+            <button class="primary-action" id="recognizeBtn">YOLO识别牌面</button>
+          </div>
+
+          <div class="recognition-output" id="recognitionOutput" aria-live="polite">
+            <p class="muted">等待识别。Demo现场可使用稳定样例，保证完整链路跑通。</p>
+          </div>
+        </article>
+
+        <article class="panel result-panel" id="result">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Step 3</p>
+              <h3>番种明细与账单</h3>
+            </div>
+            <span class="mini-badge">Rule Engine</span>
+          </div>
+
+          <div class="recognition-output" id="modelOutput">
+            <p class="muted">等待 YOLO 识别结果。识别成功后会展示牌面、置信度和检测数量。</p>
+          </div>
+
+          <div class="score-summary">
+            <div>
+              <p>总番数</p>
+              <strong id="totalFan">0</strong>
+            </div>
+            <div>
+              <p>总点数</p>
+              <strong id="totalPoints">0</strong>
+            </div>
+            <div>
+              <p>本局金额</p>
+              <strong id="totalMoney">¥0</strong>
+            </div>
+          </div>
+
+          <div class="fan-list" id="fanList"></div>
+
+          <div class="action-row">
+            <button class="secondary-action" id="recalculateBtn">重新计算</button>
+            <button class="primary-action" id="saveBillBtn">保存账单</button>
+          </div>
+        </article>
+
+        <article class="panel" id="history">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Step 4</p>
+              <h3>历史记录与轻量复盘</h3>
+            </div>
+            <span class="mini-badge">Review</span>
+          </div>
+
+          <div class="review-grid">
+            <div class="review-stat">
+              <span>总局数</span>
+              <strong id="roundCount">0</strong>
+            </div>
+            <div class="review-stat">
+              <span>净胜负</span>
+              <strong id="netMoney">¥0</strong>
+            </div>
+            <div class="review-stat">
+              <span>最高单局</span>
+              <strong id="bestRound">¥0</strong>
+            </div>
+          </div>
+
+          <div class="insight-box">
+            <p class="eyebrow">AI轻量复盘</p>
+            <p id="insightText">保存至少一局账单后生成复盘建议。</p>
+          </div>
+
+          <div class="history-list" id="historyList"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
