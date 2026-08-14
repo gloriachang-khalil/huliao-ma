@@ -9,7 +9,7 @@
 | 项目类型 | AI 产品 Hackathon 项目 |
 | 项目时间 | 2026 年 4 月，宁波抖音 AI 创变者计划 Hackathon |
 | 我的角色 | 团队 Builder：负责把产品主线转化为可点击 Demo，并根据导师与现场试玩反馈持续迭代最终交互流程 |
-| 最终交付 | [`demo-4.0/`](./demo-4.0/)：可在浏览器直接体验的静态交互 Demo |
+| 最终交付 | [在线体验 Demo 4.0](https://gloriachang-khalil.github.io/huliao-ma/demo-4.0/)：可在浏览器直接运行的静态交互 Demo |
 
 ---
 
@@ -120,7 +120,7 @@ Demo 4.0 的改法不是继续加功能，而是删掉干扰主线的跳转：
 
 ## 05. Demo 4.0 最终交付了什么
 
-[`demo-4.0/`](./demo-4.0/) 是本仓库唯一推荐体验入口，覆盖以下流程：
+[在线体验 Demo 4.0](https://gloriachang-khalil.github.io/huliao-ma/demo-4.0/) 是本仓库唯一推荐体验入口，覆盖以下流程：
 
 1. **开局与建房**：选择地区规则、底分、封顶、圈数、牌友圈及四名玩家，生成房间码与二维码样式。
 2. **连续单局结算**：选择赢家、三家支付或点炮一家、番种与倍数；确认后四人积分和单局流水同步更新。
@@ -130,7 +130,7 @@ Demo 4.0 的改法不是继续加功能，而是删掉干扰主线的跳转：
 
 ### 如何体验
 
-这是一个静态前端 Demo，无需安装依赖。直接用浏览器打开 [`demo-4.0/index.html`](./demo-4.0/index.html)。
+这是一个静态前端 Demo，无需安装依赖。点击 [在线运行 Demo 4.0](https://gloriachang-khalil.github.io/huliao-ma/demo-4.0/) 即可直接体验。
 
 建议按以下路径体验完整闭环：
 
@@ -171,9 +171,9 @@ Demo 4.0 的改法不是继续加功能，而是删掉干扰主线的跳转：
 
 | 目录 | 说明 |
 | --- | --- |
-| [`demo-4.0/`](./demo-4.0/) | **最终版本**：推荐体验入口 |
+| [在线体验 Demo 4.0](https://gloriachang-khalil.github.io/huliao-ma/demo-4.0/) | **最终版本**：推荐体验入口 |
 | `huliao-demo-v1/`、`huliao-demo-v1.1/`、`huliao-demo-v1.2/` | 早期“AI 识别 + 单局算分”探索 |
 | `demo-2.1/`、`demo-2.2/`、`demo-2.3/` | 向四人同局和移动端主路径收敛的迭代存档 |
 | `*-douyin/` | 抖音互动空间适配的历史版本 |
 
-其他目录保留为过程档案；如需体验项目，请从 [`demo-4.0/`](./demo-4.0/) 开始。
+其他目录保留为过程档案；如需体验项目，请从 [在线体验 Demo 4.0](https://gloriachang-khalil.github.io/huliao-ma/demo-4.0/) 开始。
